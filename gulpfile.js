@@ -1,5 +1,3 @@
-
-
 const gulp = require('gulp');
 // склейка файлов
 const concat = require('gulp-concat');
