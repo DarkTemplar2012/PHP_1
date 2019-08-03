@@ -1,28 +1,147 @@
 <?php
-const BR = '<br/>';
+// ДЗ 1
+$a = -5;
+$b = -9;
+if ($a >= 0 && $b >= 0) {
+    echo $a - $b . PHP_EOL;
+} elseif ($a < 0 && $b < 0) {
+    echo $a * $b . PHP_EOL;
+} elseif (($a >= 0 && $b < 0) || ($a < 0 && $b >= 0)) {
+    echo $a + $b . PHP_EOL;
+} else {
+    echo 'Старнные цифры' . PHP_EOL;
+}
+// ДЗ 2
 $a = 5;
-$b = '05';
-// var_dump($a == $b) . BR; // Почему true? Потомучто идёт сравнение без типа и строка 05 приводится как числовое и 5 = 5 тру
-// var_dump((int) '012345') . BR; // Почему 12345? инт приводит к целому числу. А целые числа с 0 не могут начинаиться
-// var_dump((float) 123.0 === (int) 123.0) . BR; // Почему false? Потому что идёт проверка по типу в одном инт в другом флоат. === false а если == true
-// var_dump((int) 0 === (int) 'hello, world') . BR; // Почему true? Потому что сравнение с числом проверяет  чиисло и так как строка начинается не с число то приводится к 0
+switch ($a) {
+    case 1:
+        echo '1' . PHP_EOL;
+    case 2:
+        echo '2' . PHP_EOL;
+    case 3:
+        echo '3' . PHP_EOL;
+    case 4:
+        echo '4' . PHP_EOL;
+    case 5:
+        echo '5' . PHP_EOL;
+    case 6:
+        echo '6' . PHP_EOL;
+    case 7:
+        echo '7' . PHP_EOL;
+    case 8:
+        echo '8' . PHP_EOL;
+    case 9:
+        echo '9' . PHP_EOL;
+    case 10:
+        echo '10' . PHP_EOL;
+    case 11:
+        echo '11' . PHP_EOL;
+    case 12:
+        echo '12' . PHP_EOL;
+    case 13:
+        echo '13' . PHP_EOL;
+    case 14:
+        echo '14' . PHP_EOL;
+    case 15:
+        echo '15' . PHP_EOL;
+        break;
+    default:
+        echo 'Не цифра' . PHP_EOL;
+}
+// ДЗ 3
+echo sums(15, 25) . PHP_EOL;
+echo mins(50, 30) . PHP_EOL;
+echo divs(12, 3) . PHP_EOL;
+echo mlts(5, 5) . PHP_EOL;
 
+function sums($a, $b)
+{
+    return $a + $b;
+}
+function mins($a, $b)
+{
+    return $a - $b;
+};
+function divs($a, $b)
+{
+    if ($b == 0) {
+        return 'Эй ты что, на ноль нельзя делить';
+    } else {
+        return $a / $b;
+    }
+}
+function mlts($a, $b)
+{
+    return $a * $b;
+}
+// ДЗ 4
+function mathOperation($arg1, $arg2, $operation)
+{
+    switch ($operation) {
+        case '+':
+            echo sums($arg1, $arg2) . PHP_EOL;
+            break;
+        case '-':
+            echo mins($arg1, $arg2) . PHP_EOL;
+            break;
+        case '/':
+            echo divs($arg1, $arg2) . PHP_EOL;
+            break;
+        case '*':
+            echo mlts($arg1, $arg2) . PHP_EOL;
+            break;
+        default:
+            echo 'Некорректный символ';
+    }
+}
+mathOperation(111111, 111111, '+');
+// ДЗ 5
 $title = 'Ремонт ноутбуков Алматы - недорого. Сервис центр - AlfaCom.kz';
 $h1 = 'Ремонт ноутбуков Алматы';
 $time = getdate();
+// ДЗ 6
+function numToPow($num, $pow)
+{
+    if ($pow > 0) {
 
+        return $num * numToPow($num, $pow - 1);
 
-// Работает только с положительными числами
-$x = 150;
-$y = 4130;
-$x = $x + $y;
-$y = $x - $y;
-$x = $x - $y;
-// echo $x . ' ' . $y
+    }
+    return 1;
+}
+echo numToPow(5, 3);
+// ДЗ 7
+function dateToWord()
+{
+    $res = 'Текущее время ';
+    switch (date('H')) {
+        case 01:
+            $res = $res . date('H') . ' час ';
+            break;
+        case 21:
+            $res = $res . date('H') . ' час ';
+            break;
+        default:
+            $res = $res . date('H') . ' часов ';
+    }
+
+    if ((date('i') == 01) || (date('i') == 21) || (date('i') == 31) || (date('i') == 41) || (date('i') == 51)) {
+        $res = $res . date('i') . ' минута';
+    } elseif (((date('i') >= 05) && (date('i') <= 20)) || ((date('i') >= 25) && (date('i') <= 30)) || ((date('i') >= 35) && (date('i') <= 40)) || ((date('i') >= 45) && (date('i') <= 50)) || ((date('i') >= 55) && (date('i') <= 60))) {
+        $res = $res . date('i') . ' минут';
+    } else {
+        $res = $res . date('i') . ' минуты';
+    }
+    return $res;
+}
+echo dateToWord();
+
 ?>
+
 
 <!DOCTYPE html>
 <html lang="ru">
+
 
 <head>
   <meta charset="utf-8">
