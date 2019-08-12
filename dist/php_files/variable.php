@@ -1,0 +1,2 @@
+<?php
+define('IMG_GALLERY_ROOT', 'img'.DIRECTORY_SEPARATOR."gallery".DIRECTORY_SEPARATOR);
