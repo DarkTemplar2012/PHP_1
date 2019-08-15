@@ -110,3 +110,10 @@ $('.jumbotron').paroller({
   direction: 'vertical', // vertical, horizontal
   transition: 'translate 0.1s ease', // CSS transition, added on elements where type:'foreground'
 });
+
+$('[data-fancybox]').fancybox({
+  caption(instance, item) {
+    return $(this).find('figcaption').html();
+  },
+});
+

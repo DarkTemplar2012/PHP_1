@@ -58,12 +58,33 @@ const buildPath = 'dist/';
 
 // пути файлов
 const src = {
-  html: ['app/*.html', 'app/*.php'],
-  js: 'app/js/**/*.js',
-  scss: 'app/scss/**/*.scss',
-  css: 'app/css/**/*.css',
-  img: 'app/img/**',
-  file: ['app/**', 'app/**/.*', '!app/packages/**', '!app/packages/**/.*', '!app/img/**', '!app/**/*.scss', '!app/**/*.css', '!app/**/*.js', '!app/**/*.html', '!app/*.php'],
+  htmlPublic: [
+    'app/public/*.html',
+    'app/public/*.php',
+  ],
+  html: [
+    'app/*.html',
+    'app/*.php',
+    'app/**/*.php',
+    '!app/public/**/*.php',
+
+  ],
+  js: 'app/public/js/**/*.js',
+  scss: 'app/public/scss/**/*.scss',
+  css: 'app/public/css/**/*.css',
+  img: 'app/public/img/**',
+  file: [
+    'app/**',
+    'app/public/**',
+    'app/public/**/.*',
+    '!app/public/packages/**',
+    '!app/public/packages/**/.*',
+    '!app/public/img/**',
+    '!app/public/**/*.scss',
+    '!app/public/**/*.css',
+    '!app/public/**/*.js',
+    '!app/public/**/*.html',
+    '!app/public/*.php'],
 };
 
 // запуск сервера
@@ -82,7 +103,7 @@ gulp.task('js', () => gulp.src(src.js)
   .pipe(concat(`${fileName}.js`))
   // .pipe(browserify())
   .pipe(gulpif(prod, uglify()))
-  .pipe(gulp.dest(`${buildPath}/js`))
+  .pipe(gulp.dest(`${buildPath}/public/js`))
   .on('end', browserSync.reload));
 
 // таск на CSS сборку
@@ -92,7 +113,7 @@ gulp.task('scss', () => gulp.src(src.scss)
     message: '<%= error.message %>',
     title: 'Sass Error!',
   })))
-  .pipe(gulp.dest('app/css'))
+  .pipe(gulp.dest('app/public/css'))
   // .pipe(cssTimeStamp({useDate:true}))
   .pipe(browserSync.reload({
     stream: true,
@@ -107,14 +128,14 @@ gulp.task('css', () => gulp.src(src.css)
   .pipe(gulpif(prod, csso()))
   // .pipe(version({}))
   .pipe(concat(`${fileName}.css`))
-  .pipe(gulp.dest(`${buildPath}/css`))
+  .pipe(gulp.dest(`${buildPath}/public/css`))
   // .pipe(cssTimeStamp({useDate:true}))
   .pipe(browserSync.reload({
     stream: true,
   })));
 
 // таск на HTML сборку
-gulp.task('html', () => gulp.src(src.html)
+gulp.task('htmlPublic', () => gulp.src(src.htmlPublic)
   .pipe(plumber())
   // .pipe(htmlreplace({
   //   'css': 'css/' + fileName + '.css',
@@ -125,6 +146,14 @@ gulp.task('html', () => gulp.src(src.html)
   // })))
   // .pipe(gulpif(prod, strreplace('main.', 'main.min.')))
   // .pipe(htmlreplace('href="css/main.css"', 'href="css/main.css?v=123"'))
+  .pipe(strreplace(/css\/main\.css/g, 'css/main.css?v=1.2.1'))
+  .pipe(strreplace(/js\/main\.js/g, 'js/main.js?v=1.2.1'))
+  .pipe(gulp.dest(buildPath + '/public/'))
+  .pipe(browserSync.reload({
+    stream: true,
+  })));
+gulp.task('html', () => gulp.src(src.html)
+  .pipe(plumber())
   .pipe(strreplace(/css\/main\.css/g, 'css/main.css?v=1.2.1'))
   .pipe(strreplace(/js\/main\.js/g, 'js/main.js?v=1.2.1'))
   .pipe(gulp.dest(buildPath))
@@ -168,13 +197,14 @@ gulp.task('img', () => gulp.src(src.img)
   //   smooth: 2
   // }))
 
-  .pipe(gulp.dest(`${buildPath}/img`))
+  .pipe(gulp.dest(`${buildPath}/public/img`))
   .on('end', browserSync.reload)
 );
 
 // таск на слежение всех тасков при изменение файлов
 gulp.task('watch', () => {
   gulp.watch(src.html, gulp.series('html'));
+  gulp.watch(src.htmlPublic, gulp.series('htmlPublic'));
   gulp.watch(src.js, gulp.series('js'));
   gulp.watch(src.scss, gulp.series('scss'));
   gulp.watch(src.css, gulp.series('css'));
@@ -192,6 +222,7 @@ gulp.task('default', gulp.series(
   gulp.parallel('css'),
   gulp.parallel('file'),
   gulp.parallel('html'),
+  gulp.parallel('htmlPublic'),
   gulp.parallel('img'),
   // gulp.parallel('js', 'css', 'html', 'file', 'img'),
   // таск на создание сервера и проуслушку всего
