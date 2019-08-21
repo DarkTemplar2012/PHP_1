@@ -3693,6 +3693,12 @@ footer {
     .desk {
       display: block !important; } }
 
+figcaption {
+  display: none; }
+
+figure {
+  margin: 0; }
+
 .b-header {
   width: 100%;
   height: 300px;
