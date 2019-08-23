@@ -24,10 +24,14 @@
   <meta name="msapplication-TileColor" content="#ffffff">
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="public/css/main.css?v=1.2.1">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
 </head>
 
 <body>
-  <header class="b-header jumbotron">
+  <!-- <header class="b-header jumbotron">
     <div class="b-header__wrap">
       <div class="b-header_nav__burgerMain"><span class="b-header_nav__burger"></span></div>
       <nav class="b-header_nav wow zoomInRight" id="menu">
@@ -43,5 +47,5 @@
       <a href="https://alfacom.kz/" class="b-hedaer_logo"><img src="public/img/logo.svg" alt="Ремонт ноутбуков AlfaCom"
           class="b-header_logo"></a>
       <h1 class="b-header_title wow zoomIn">Ремонт ноутбуков Алматы</h1>
-    </div>
+    </div> -->
   </header>
