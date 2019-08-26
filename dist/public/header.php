@@ -31,21 +31,45 @@
 </head>
 
 <body>
-  <!-- <header class="b-header jumbotron">
-    <div class="b-header__wrap">
-      <div class="b-header_nav__burgerMain"><span class="b-header_nav__burger"></span></div>
-      <nav class="b-header_nav wow zoomInRight" id="menu">
-        <ul class="b-header_navUl">
-          <li class="b-header_navLi"><a href="index" class="b-header_navA">Главная</a></li>
-          <li class="b-header_navLi"><a href="#link" class="b-header_navA">Ссылки на нас</a></li>
-          <li class="b-header_navLi"><a href="#request" class="b-header_navA">Оставить заявку</a></li>
-          <li class="b-header_navLi"><a href="#services" class="b-header_navA">Услуги</a></li>
-          <li class="b-header_navLi"><a href="#benefit" class="b-header_navA">Преимущества</a></li>
-          <li class="b-header_navLi"><a href="#contact" class="b-header_navA">Контакты</a></li>
-        </ul>
-      </nav>
-      <a href="https://alfacom.kz/" class="b-hedaer_logo"><img src="public/img/logo.svg" alt="Ремонт ноутбуков AlfaCom"
-          class="b-header_logo"></a>
-      <h1 class="b-header_title wow zoomIn">Ремонт ноутбуков Алматы</h1>
-    </div> -->
-  </header>
+
+  <nav class="navbar navbar-dark bg-dark">
+
+    <?php if (!$_SESSION['isAuth']): ?>
+    <div>
+      <span class="navbar-brand">Здравствуй, гость</span>
+      <a href="/login.php" class="btn btn-success" role="button" aria-pressed="true">Авторизация</a>
+      <a href="/index.php" class="btn btn-info" role="button" aria-pressed="true">Главная</a>
+      <a href="/basket.php" style="margin-right: 0;color: white; display: block;">В корзине
+        <?php
+        if (isset($_SESSION['good'])) {
+            echo count($_SESSION['good']);
+        } else {
+            echo 0;
+        }
+        ?>
+        товаров</a>
+    </div>
+    <?php else: ?>
+    <div>
+      <span class="navbar-brand">Вы авторизированы как <a href="/cabinet.php"><strong style="color: white;"><?=$_SESSION['user_name']?></strong></a>
+        <a href="/index.php" class="btn btn-info" role="button" aria-pressed="true">Главная</a>
+
+        <form method="post" style="display: inline;">
+          <input type="submit" name="logout" value="Exit" class="btn btn-danger">
+        </form>
+
+
+      </span>
+      <a href="/basket.php" style="margin-right: 0;color: white; display: block;">В корзине
+        <?php
+          if (isset($_SESSION['good'])) {
+              echo count($_SESSION['good']);
+          } else {
+              echo 0;
+          }
+        ?>
+        товаров</a>
+
+    </div>
+    <?endif;?>
+  </nav>

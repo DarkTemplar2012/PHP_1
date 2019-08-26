@@ -1,7 +1,11 @@
 <?php
 include  'engine/autoload.php';
 autoload('config');
-include ENGINE_DIR.'index.php';
+include ENGINE_DIR.'session.php';
+
+// include ENGINE_DIR.'index.php';
+include ENGINE_DIR."basket.php";
+
 include PUBLIC_DIR.'header.php';
 
 $query = "SELECT * FROM `geek`.`feedback` WHERE `url` LIKE '%monitor%'";
@@ -26,7 +30,10 @@ while ($row = mysqli_fetch_assoc($result)) {
     <li class="list-group-item">1500$</li>
 
   </ul>
-
+  <form method="post">
+    <input type="hidden" name="good" value="2" />
+    <button type="submit" class="btn btn-dark">В корзину</button>
+  </form>
 </div>
 
 <span>ОТЗЫВЫ</span>
