@@ -19,3 +19,4 @@ include PUBLIC_DIR.'index.php';
 
 
 include PUBLIC_DIR.'footer.php';
+echo $login;
