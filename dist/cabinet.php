@@ -12,10 +12,10 @@ include ENGINE_DIR.'session_destroy_other.php';
 
 
 include PUBLIC_DIR.'header.php';
-// include PUBLIC_DIR.'auth_check.php';
+include PUBLIC_DIR.'auth_check.php';
 
 
-include PUBLIC_DIR.'index.php';
+// include PUBLIC_DIR.'index.php';
 
 
 include PUBLIC_DIR.'footer.php';
