@@ -1,11 +1,19 @@
 <?php
-if (isset($_SESSION['good'])) :
+
+if (!empty($_SESSION['good'])) :
     $goods = $_SESSION['good'];
-    // print_r($goods) ;
+    print_r($goods) ;
     $counts = array_count_values($goods);
     // print_r($counts);
     // print_r(array_reverse($counts));
-    $totalPrice = 0;?>
+    $totalPrice = 0;
+    if (!$_SESSION['isAuth'] && isset($_POST['createOrder'])): ?>
+<h5 class="m-3 alert alert-danger">
+  Доступ к контенту ограничен! <br />
+  <a href="/login.php">Войдите</a> , чтобы продолжить
+</h5>
+<?endif;
+?>
 <div style="display: flex">
   <?php
     foreach ($counts as $key => $value) :
@@ -32,11 +40,16 @@ if (isset($_SESSION['good'])) :
         <input type="hidden" name="goodRem" value="<?=$key?>" />
         <button type="submit" class="btn btn-dark">Убрать</button>
       </form>
+
     </div>
   </div>
   <?php
 endforeach; ?>
 </div>
+<form method="post">
+  <input type="hidden" name="createOrder" />
+  <button type="submit" class="btn btn-primary">Сформировать заказ</button>
+</form>
 <span>Итого <?=$totalPrice?>$</span>
 <?php
  else :?>

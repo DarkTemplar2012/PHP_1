@@ -5,6 +5,6 @@ if (isset($_POST['logout'])) {
     // session_destroy();
     $_SESSION['isAuth'] = false;
 
-    header('location: '.$_SERVER['REQUEST_URI']);
+    header('location: '.$_SERVER['PHP_SELF']);
     die;
 }
